@@ -11,8 +11,12 @@ def get_results(filename, num_pre_cols, num_post_cols, min_val, max_val, questio
 
     st.subheader(':grey[Pre-Checks]')
     df = pd.read_excel(filename)
-    df = df.iloc[:, num_pre_cols: -num_post_cols]
+    if num_post_cols != 0:
+        df = df.iloc[:, num_pre_cols: -num_post_cols]
+    else:
+        df = df.iloc[:, num_pre_cols:]
     num_cols = len(df.columns)
+    st.write(num_cols)
 
     num_cols_even = num_cols % 2 == 0
     if num_cols_even:
